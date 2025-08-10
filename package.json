@@ -1,0 +1,16 @@
+{
+  "name": "channel4-render",
+  "version": "0.0.1",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.3.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
