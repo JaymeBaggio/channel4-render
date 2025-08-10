@@ -55,6 +55,37 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
+// ---- render job endpoint (scaffold) ----
+app.post("/render", async (req, res) => {
+  try {
+    const { videoUrl, platform, partnerLogoUrl, endCardColor } = req.body || {};
+
+    // Basic validation for now
+    if (!videoUrl) {
+      return res.status(400).json({
+        error: "videoUrl is required (public URL to the source video)"
+      });
+    }
+
+    // TODO: In the next step we will:
+    //  - fetch the guidelines and map rules by `platform`
+    //  - prepare FFmpeg (or the chosen engine) overlays for Channel 4 logo, partner logo, end card color
+    //  - render and return a downloadable URL
+
+    // For now: accept and echo a “job” so we can wire up the UI
+    const jobId = `${Date.now()}`;
+    return res.status(202).json({
+      message: "Job accepted",
+      jobId,
+      received: { videoUrl, platform, partnerLogoUrl, endCardColor }
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Unexpected error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("Server listening on port", PORT);
 });
+app.use(express.json()); //
